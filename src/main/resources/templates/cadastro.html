@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Atividade 1</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/style.css}" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <header>
+                    <div class="col-md-4">
+                        <h1 th:if="${Filme.Id}">Alteração de Filme</h1>
+                        <h1 th:unless="${Filme.Id}">Cadastro de Filmes</h1>
+                    </div>
+                    <div class="col-md-8">
+                        <h3 th:insert="~{navbar.html :: nav}"></h3>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <article>
+                    <div class="col-md-12">
+                        <form th:action="@{/cadastro}" method="post" th:object="${Filme}">
+                            <div> 
+                                <p>Título do Filme <input type="text" th:field="${Filme.Titulo}" /> </p>  
+                                <p>Sinopse: <input type="text" th:field="${Filme.Sinopse}" /> </p> 
+                                <p>Gênero: <input type="text" th:field="${Filme.Genero}" /> </p> 
+                                <p>Ano de Lançamento <input type="text" th:field="${Filme.ano_lancamento}" /> </p> 
+                                <input type="hidden" th:field="${Filme.Id}" />
+                            </div>
+                            <button type="submit" class="btn btn-dark">Enviar</button>
+                            <a th:href="@{/index}">
+                                <button type="button" class="btn btn-dark">Voltar</button>
+                            </a>
+                        </form>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <footer>
+                    <div class="col-md-12">
+                        
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/script.js}"></script> 
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Atividade 1</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/style.css}" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <header>
+                    <div class="col-md-4">
+                        <h1>Alterar Analise</h1>
+                    </div>
+                    <div class="col-md-8">
+                        <h3 th:insert="~{navbar.html :: nav}"></h3>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <article>
+                    <div class="col-md-12">
+                        <h2>Analise o filme:</h2>
+                        <form th:action="@{/analise}" method="post" th:object="${Analise}">
+                            <div>
+                                <p>Nota: <input type="number" th:field="${Analise.Nota}" max="10" min="0" /></p>
+                                <p>Analise: <textarea class="form-control" th:field="${Analise.Analise}"></textarea></p>
+                                <input type="hidden" th:field="${Analise.Id}" />
+                            </div>
+                            <button type="submit">Enviar</button>
+                            <a th:href="@{/index}">
+                                <button type="button" class="btn btn-dark">Voltar</button>
+                            </a>
+                        </form>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <footer>
+                    <div class="col-md-12">
+                        
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/script.js}"></script>
+    </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Atividade 1</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/style.css}" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <header>
+                    <div class="col-md-4">
+                        <h1>Detalhes do Filme <span th:text="${Filme.getTitulo()}"/></h1>
+                    </div>
+                    <div class="col-md-8">
+                        <h3 th:insert="~{navbar.html :: nav}"></h3>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <article>
+                    <div class="col-md-6">
+                        <ul class="menu">
+                            <li>ID: <span th:text="${Filme.Id}" /></li>
+                            <li><p>Gênero: <span th:text="${Filme.Genero}" /></p></li>
+                            <li><p>Ano de Lançamento: <span th:text="${Filme.Ano_lancamento}" /></p></li>
+                            <li><p>Sinopse: <span th:text="${Filme.Sinopse}" /></p></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6" th:if="${Analises.Id}">
+                        <h2>Sua Analise</h2>
+                        <ul class="menu">
+                            <li><p>Nota: <span th:text="${Analises.Nota}"/></p></li>
+                            <li><p>Analise: <span th:text="${Analises.Analise}"/></p></li>
+                        </ul>
+                        <a th:href="@{/index}"><input type="button" class="btn btn-dark" value="Voltar" /></a>
+                        <a th:href="@{'/excluir-analise?id=' +${Filme.Id}}"><input type="button" class="btn btn-danger" value="Excluir" /></a>
+                        <a th:href="@{'/alterar-analise?id=' +${Filme.Id}}"><button type="button" class="btn btn-dark">Alterar</button></a>
+                    </div>
+                    <div class="col-md-6" th:unless="${Analises.Id}">
+                        <h2>Analise o filme:</h2>
+                        <form th:action="@{/analise}" method="post" th:object="${Analise}">
+                            <div>
+                                <p>Nota: <input type="number" th:field="${Analise.Nota}" max="10" min="0" /></p>
+                                <p>Analise: <textarea class="form-control" th:field="${Analise.Analise}"></textarea></p>
+                                <input type="hidden" th:field="${Filme.Id}" />
+                            </div>
+                            <button type="submit">Enviar</button>
+                        </form>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <footer>
+                    <div class="col-md-12">
+                        
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/script.js}"></script>
+    </body>
+</html>

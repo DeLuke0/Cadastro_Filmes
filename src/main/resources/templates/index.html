@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Atividade 1</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/style.css}" />
+        <link th:href="@{/css/}+${css}+'.css'" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <header>
+                    <div class="col-md-4">
+                        <h1>Filmes Cadastrados</h1>
+                    </div>
+                    <div class="col-md-8">
+                        <h3 th:insert="~{navbar.html :: nav}"></h3>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <article>
+                    <div class="col-md-12">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Título</th>
+                                    <th>Sinopse</th>
+                                    <th>Gênero</th>
+                                    <th>Ano de Lançamento</th>
+                                    <th>Detalhes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="Filmes : ${FilmesList}">
+                                    <td th:text="${Filmes.Id}"></td> 
+                                    <td th:text="${Filmes.Titulo}"></td>
+                                    <td th:text="${Filmes.Sinopse}"></td> 
+                                    <td th:text="${Filmes.Genero}"></td> 
+                                    <td th:text="${Filmes.Ano_lancamento}"></td> 
+                                    <td>
+                                        <a th:href="@{'/analise?Id=' + ${Filmes.Id}}"><button type="button" class="btn btn-info">+ Detalhes</button></a>
+                                        <a th:href="@{'/alterar-filme?id=' +${Filmes.Id}}"><button type="button" class="btn btn-dark">Alterar</button></a>
+                                        <a th:href="@{'/excluir-filme?id=' +${Filmes.Id}}"><button type="button" class="btn btn-danger">Excluir</button></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <footer>
+                    <div class="col-md-12">
+                        <form th:action="@{/preferencias}" method="POST"> 
+                            <p><label for="txtNome">Seu nome:</label><input type="text" name="nome" id="txtNome"/></p> 
+                            <p><label for="selEstilo">Seu esquema de cores favorito</label> 
+                            <select name="estilo" id="selEstilo"> 
+                                <option value="claro">Tema Claro</option> 
+                                <option value="escuro">Tema Escuro</option> 
+                            </select></p> 
+                            <p><input type="submit" value="OK"/></p> 
+                        </form>
+                        <p>O estilo atual da página é <strong th:text="${css}" /></p> 
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/script.js}"></script>
+    </body>
+</html>
